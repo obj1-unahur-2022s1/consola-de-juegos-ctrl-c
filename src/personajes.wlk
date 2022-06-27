@@ -24,9 +24,9 @@ object nave {
 		
 		// Sonido disparo
 		const shoot = game.sound("Sounds/disparo_laser.mp3")
+		const mePego = game.sound("Sounds/cambio_color.mp3")
 		if(!shoot.played())
 				shoot.play()
-		//game.sound("Sounds/disparo_laser.mp3")
 		
 		game.addVisual(disparo)
 		
@@ -67,6 +67,8 @@ class Alien {
 	var property position
 	var property image = 'alienVerde.png'
 	var property hp = 3
+	const mePego = game.sound("Sounds/cambio_color.mp3")
+	const meMato = game.sound("Sounds/muere_bicho.mp3")
 	
 	// el alien pierde uno de hp al recibir un disparo.
 	method recibirDisparo() { hp = 0.max(hp - 1) }
@@ -75,11 +77,14 @@ class Alien {
 	method checkHp() {
 		if (hp == 2) { 
 			image = 'alienNaranja.png'
+			mePego.play()
 		}
 		else if (hp == 1) { 
 			image = 'alienRosa.png'
+			mePego.play()
 		}
 		else { 
+			meMato.play()
 			game.removeVisual(self)
 		}	
 	}
