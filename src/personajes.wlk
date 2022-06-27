@@ -1,5 +1,6 @@
 import wollok.game.*
 import juego.*
+import visual.*
 
 // cambie la nave por un objeto ya que es una unica nave en el juego.
 object nave {
@@ -82,4 +83,5 @@ class Alien {
 			game.removeVisual(self)
 		}	
 	}
+	
 }

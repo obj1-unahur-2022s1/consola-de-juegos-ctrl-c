@@ -1,24 +1,28 @@
 import wollok.game.*
 import consola.*
 import personajes.*
+import visual.*
 
 class Juego {
 	/*
 	var property position = null
 	var property color 
 	
-	method iniciar(){
-        game.addVisual(object{method position()= game.center() method text() = "Juego "+color + " - <q> para salir"})		
-	}
+	
+	}	
 	
 	method terminar(){
 
 	}
 	method image() = "juego" + color + ".png"
 	*/
+	
+		
 	var property color
 	var property position = null
 	
+	
+		
 	method spaveInvader() {
 		//game.stopAllSounds()
 		// creacion de aliens que no me gusta del todo.
@@ -45,7 +49,8 @@ class Juego {
 		var alien21 = new Alien (position = game.at(11,9))
 		
 		game.clear()
-		game.boardGround("espacio1.png") /*probando cambiar el fondo, y fallando */
+		game.addVisual(inicioDelJuego)
+		
 		/*game.ground("dino.png") probando cambiar el fondo, y fallando */
 		
 		// agregando todos los personajes
@@ -82,14 +87,17 @@ class Juego {
 	method iniciar() {
 		// Sonido INTRO
 		const intro = game.sound("Sounds/introSound.mp3")
+		game.addVisual(fondoDelJuego)
 		if(!intro.played())
 			intro.play()
-		game.addVisual(object{method position()= game.center() method text() = 
+		game.addVisual(object{method position()= game.at(8,4) method text() = 
 		"SPAVE INVADERS\n
-		INSTRUCCIONES: Utilice las flechas para mover su nave, asegurese de disparar con la barra espaciadora a todas las naves\n
+		INSTRUCCIONES: Utilice las flechas para mover su nave, 
+		\nasegurese de disparar con la barra espaciadora a todas las naves\n
 		\n
 		<Enter> para empezar - <q> para salir"})
-		game.ground("espacio1.png")
+		
+		
 		keyboard.enter().onPressDo ({self.spaveInvader()})
 	}
 	

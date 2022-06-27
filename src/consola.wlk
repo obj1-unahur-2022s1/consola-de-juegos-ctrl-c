@@ -1,5 +1,6 @@
 import wollok.game.* 
 import juego.*
+import visual.*
 
 object consola {
 
@@ -17,10 +18,13 @@ object consola {
 		game.height(12)
 		game.width(17)
 		game.title("Consola de juegos")
+		game.addVisual(general)
+		
+		
 	}
 	
 	method iniciar(){
-		menu = new MenuIconos(posicionInicial = game.center().left(2))	
+		menu = new MenuIconos(posicionInicial = game.at(8,4).left(2))	
 		game.addVisual(menu)
 		juegos.forEach{juego=>menu.agregarItem(juego)}
 		menu.dibujar()
@@ -39,6 +43,7 @@ object consola {
 		game.clear()
 		self.iniciar()
 	}
+
 }
 
 
@@ -91,6 +96,7 @@ class MenuIconos{
 	method izquierda(){
 		seleccionado = (seleccionado - 1).max(1)
 	}
+	
 }
 
 
