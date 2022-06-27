@@ -21,6 +21,12 @@ object nave {
 	method disparar(){
 		var disparo = new Disparo (position = self.position().up(1))
 		
+		// Sonido disparo
+		const shoot = game.sound("Sounds/disparo_laser.mp3")
+		if(!shoot.played())
+				shoot.play()
+		//game.sound("Sounds/disparo_laser.mp3")
+		
 		game.addVisual(disparo)
 		
 		game.onTick(100, 'movimientoDisparo', {

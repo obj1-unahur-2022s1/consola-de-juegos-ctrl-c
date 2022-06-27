@@ -20,6 +20,7 @@ class Juego {
 	var property position = null
 	
 	method spaveInvader() {
+		game.stopAllSounds()
 		// creacion de aliens que no me gusta del todo.
 		var alien1 = new Alien (position = game.at(5,11))
 		var alien2 = new Alien (position = game.at(5,10))
@@ -71,7 +72,7 @@ class Juego {
 		})
 		
 		// disparo de la nave
-		keyboard.x().onPressDo ({ nave.disparar() })
+		keyboard.x().onPressDo ({ nave.disparar()  })
 		
 		// una prueba de la colicion del disparo y el alien
 		/*alien1.onCollideDo(disparo, alien1.degragadarHp())*/
@@ -79,6 +80,10 @@ class Juego {
 	}
 	
 	method iniciar() {
+		// Sonido INTRO
+		const intro = game.sound("Sounds/introSound.mp3")
+		if(!intro.played())
+			intro.play()
 		game.addVisual(object{method position()= game.center() method text() = 
 		"SPAVE INVADERS\n
 		INSTRUCCIONES: Utilice las flechas para mover su nave, asegurese de disparar con la barra espaciadora a todas las naves\n
