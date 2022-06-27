@@ -68,6 +68,7 @@ class Alien {
 	var property image = 'alienVerde.png'
 	var property hp = 3
 	const mePego = game.sound("Sounds/cambio_color.mp3")
+	const mePego2 = game.sound("Sounds/Le_pega.mp3")
 	const meMato = game.sound("Sounds/muere_bicho.mp3")
 	
 	// el alien pierde uno de hp al recibir un disparo.
@@ -77,14 +78,15 @@ class Alien {
 	method checkHp() {
 		if (hp == 2) { 
 			image = 'alienNaranja.png'
-			mePego.play()
+			mePego2.play()
 		}
 		else if (hp == 1) { 
 			image = 'alienRosa.png'
 			mePego.play()
 		}
 		else { 
-			meMato.play()
+			if(!meMato.played())
+				meMato.play()
 			game.removeVisual(self)
 		}	
 	}
