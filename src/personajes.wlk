@@ -52,7 +52,11 @@ class Disparo {
 	// cuando sale del marco del juego se elimina al elemento (trae un error si se dispara mucho seguido)
 	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
 	
-	method remover() = game.removeVisual(self)
+	method remover() {
+		game.removeTickEvent('movimientoDisparo')
+		game.removeVisual(self)
+	}
+	
   	
   	// una prueba con la colicion del disparo y el alien, pero al ser ambos clases nose me sale.
   	/*method darEnAlien(unAlien) { game.onCollideDo(unAlien, unAlien.degragadarHp()) }*/

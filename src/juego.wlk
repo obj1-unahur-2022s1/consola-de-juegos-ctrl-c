@@ -72,7 +72,7 @@ class Juego {
 		})
 		
 		// disparo de la nave
-		keyboard.x().onPressDo ({ nave.disparar()  })
+		keyboard.x().onPressDo ({ nave.disparar() })
 		
 		// una prueba de la colicion del disparo y el alien
 		/*alien1.onCollideDo(disparo, alien1.degragadarHp())*/
