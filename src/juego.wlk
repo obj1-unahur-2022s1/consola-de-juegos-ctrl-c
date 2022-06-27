@@ -75,6 +75,7 @@ class Juego {
 		
 		// una prueba de la colicion del disparo y el alien
 		/*alien1.onCollideDo(disparo, alien1.degragadarHp())*/
+		
 	}
 	
 	method iniciar() {

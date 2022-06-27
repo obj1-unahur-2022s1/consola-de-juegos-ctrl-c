@@ -1,4 +1,5 @@
 import wollok.game.*
+import juego.*
 
 // cambie la nave por un objeto ya que es una unica nave en el juego.
 object nave {
@@ -16,7 +17,7 @@ object nave {
 		self.position(self.position().left(speed))
 	}
 	
-	// el disparo de la nave y el movimeinto del disparo.
+	// el disparo de la nave y el movimiento del disparo.
 	method disparar(){
 		var disparo = new Disparo (position = self.position().up(1))
 		
@@ -26,6 +27,12 @@ object nave {
 			disparo.movement()
 			disparo.disparoFuera()
 		})
+		
+		game.whenCollideDo(disparo, { alien1 => 
+			alien1.recibirDisparo() 
+			alien1.checkHp()
+			disparo.remover()
+		} )
 	}
 }
 
@@ -36,8 +43,10 @@ class Disparo {
 	// movimiento para arriba constante del disparo.
 	method movement() { self.position( position.up(1) ) }
 	
-	// cuando sale del marco del juego se termina de repetir el movimiento (igual creo q tambien tendria que borrarlo)
-	method disparoFuera() { if ([-1, 12].contains(position.y())) game.removeTickEvent('movimientoDisparo') }
+	// cuando sale del marco del juego se elimina al elemento (trae un error si se dispara mucho seguido)
+	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
+	
+	method remover() = game.removeVisual(self)
   	
   	// una prueba con la colicion del disparo y el alien, pero al ser ambos clases nose me sale.
   	/*method darEnAlien(unAlien) { game.onCollideDo(unAlien, unAlien.degragadarHp()) }*/
@@ -52,17 +61,14 @@ class Alien {
 	method recibirDisparo() { hp = 0.max(hp - 1) }
 	
 	// ademas de perder hp, cambia de color.
-	method degragadarHp() {
-		if (hp == 3) { 
-			self.recibirDisparo()
+	method checkHp() {
+		if (hp == 2) { 
 			image = 'alienNaranja.png'
 		}
-		else if (hp == 2) { 
-			self.recibirDisparo()
+		else if (hp == 1) { 
 			image = 'alienRosa.png'
 		}
 		else { 
-			self.recibirDisparo()
 			game.removeVisual(self)
 		}	
 	}
