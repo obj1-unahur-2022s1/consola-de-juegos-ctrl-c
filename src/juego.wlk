@@ -20,7 +20,7 @@ class Juego {
 	var property position = null
 	
 	method spaveInvader() {
-		game.stopAllSounds()
+		//game.stopAllSounds()
 		// creacion de aliens que no me gusta del todo.
 		var alien1 = new Alien (position = game.at(5,11))
 		var alien2 = new Alien (position = game.at(5,10))
