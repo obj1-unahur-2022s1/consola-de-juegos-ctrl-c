@@ -51,8 +51,6 @@ class Juego {
 		game.clear()
 		game.addVisual(inicioDelJuego)
 		
-		/*game.ground("dino.png") probando cambiar el fondo, y fallando */
-		
 		// agregando todos los personajes
 		game.addVisual(nave)
 		game.addVisual(alien1)	game.addVisual(alien8)	game.addVisual(alien15)
@@ -79,9 +77,6 @@ class Juego {
 		// disparo de la nave
 		keyboard.x().onPressDo ({ nave.disparar() })
 		
-		// una prueba de la colicion del disparo y el alien
-		/*alien1.onCollideDo(disparo, alien1.degragadarHp())*/
-		
 	}
 	
 	method iniciar() {
@@ -93,15 +88,15 @@ class Juego {
 		game.addVisual(object{method position()= game.at(8,4) method text() = 
 		"SPAVE INVADERS\n
 		INSTRUCCIONES: Utilice las flechas para mover su nave, 
-		\nasegurese de disparar con la barra espaciadora a todas las naves\n
+		\nasegurese de disparar con la X a todos los aliens\n
 		\n
 		<Enter> para empezar - <q> para salir"})
 		
-		
 		keyboard.enter().onPressDo ({self.spaveInvader()})
+		keyboard.q().onPressDo ({self.terminar()})
 	}
 	
 	method image() = "logo.png"
 	
-	method terminar() {}
+	method terminar() { game.stop() }
 }
