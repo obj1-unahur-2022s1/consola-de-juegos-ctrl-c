@@ -48,6 +48,9 @@ class Juego {
 		var alien20 = new Alien (position = game.at(11,10))
 		var alien21 = new Alien (position = game.at(11,9))
 		
+		var aliens = [alien1, alien2, alien3, alien4, alien5, alien6, alien7, alien8, alien9, alien10,
+			alien11, alien12, alien13, alien14, alien15, alien16, alien17, alien18, alien19, alien20, alien21]
+		
 		game.clear()
 		game.addVisual(inicioDelJuego)
 		
@@ -60,6 +63,9 @@ class Juego {
 		game.addVisual(alien5)	game.addVisual(alien12)	game.addVisual(alien19)
 		game.addVisual(alien6)	game.addVisual(alien13)	game.addVisual(alien20)
 		game.addVisual(alien7)	game.addVisual(alien14)	game.addVisual(alien21)
+		
+		// prueba de movimiento de los aliens
+		aliens.forEach({ a => a.movimientoAliens() })
 		
 		// movimiento de la nave, frenando en los limites de la pantalla
 		keyboard.left().onPressDo ({
@@ -76,7 +82,7 @@ class Juego {
 		
 		// disparo de la nave
 		keyboard.x().onPressDo ({ nave.disparar() })
-		
+
 	}
 	
 	method iniciar() {

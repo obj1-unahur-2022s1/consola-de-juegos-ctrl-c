@@ -88,7 +88,20 @@ class Alien {
 			if(!meMato.played())
 				meMato.play()
 			game.removeVisual(self)
+			/*game.removeTickEvent('movimientoAlien')*/
 		}	
 	}
 	
+	// movimiento de los aliens de esquina izquierda a esquina derecha.
+	method movimientoAliens() {
+		game.onTick(500, 'movimientoAlien', {
+			self.movimientoAlien()
+		})
+	}
+	
+	// mueve al alien a la izquierda hasta el limite, despues lo lleva para la derecha. en ves de hacer eso aparece por el otro lado.
+	method movimientoAlien() {
+		if (self.position().x() > 0 ) { self.position(self.position().left(1)) }
+		else { self.position(self.position().right(game.width()- 1)) }
+	}
 }
