@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import visual.*
+import consola.*
 
 // cambie la nave por un objeto ya que es una unica nave en el juego.
 object nave {
@@ -67,9 +68,16 @@ class Alien {
 	var property position
 	var property image = 'alienVerde.png'
 	var property hp = 3
+	var property direccion = 'derecha'
 	const mePego = game.sound("Sounds/cambio_color.mp3")
 	const mePego2 = game.sound("Sounds/Le_pega.mp3")
 	const meMato = game.sound("Sounds/muere_bicho.mp3")
+	
+	//Cuando ganan los aliens
+	method victoria() {		
+		game.clear()
+        game.addVisual(gameOver)
+	}
 	
 	// el alien pierde uno de hp al recibir un disparo.
 	method recibirDisparo() { hp = 0.max(hp - 1) }
@@ -101,7 +109,26 @@ class Alien {
 	
 	// mueve al alien a la izquierda hasta el limite, despues lo lleva para la derecha. en ves de hacer eso aparece por el otro lado.
 	method movimientoAlien() {
-		if (self.position().x() > 0 ) { self.position(self.position().left(1)) }
-		else { self.position(self.position().right(game.width()- 1)) }
+		if (direccion == 'derecha'){
+			self.position(self.position().right(1))
+		}else{
+			self.position(self.position().left(1))
+		}
+		if (self.position().x() == 0 || self.position().x() == game.width()-1){
+			self.moverAbajoSiPuede()
+			self.cambiarDireccion()
+		}
+		/*if (self.position().x() > 0 ) { self.position(self.position().left(1)) }
+		else { self.position(self.position().right(game.width()- 1)) }*/
 	}
+	
+	// si pueden bajan una posición, si llegan a la altura de la nave es game over
+	method moverAbajoSiPuede() {
+        if(self.position().y() > nave.position().y()) { self.position(self.position().down(1)) }
+        else { 
+            self.victoria()
+         }
+    }
+    
+    method cambiarDireccion() = if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'}
 }

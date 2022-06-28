@@ -3,21 +3,7 @@ import consola.*
 import personajes.*
 import visual.*
 
-class Juego {
-	/*
-	var property position = null
-	var property color 
-	
-	
-	}	
-	
-	method terminar(){
-
-	}
-	method image() = "juego" + color + ".png"
-	*/
-	
-		
+class Juego {		
 	var property color
 	var property position = null
 	
@@ -64,10 +50,10 @@ class Juego {
 		game.addVisual(alien6)	game.addVisual(alien13)	game.addVisual(alien20)
 		game.addVisual(alien7)	game.addVisual(alien14)	game.addVisual(alien21)
 		
-		// prueba de movimiento de los aliens
+		//movimiento de los aliens
 		aliens.forEach({ a => a.movimientoAliens() })
 		
-		// movimiento de la nave, frenando en los limites de la pantalla
+		//movimiento de la nave, frenando en los limites de la pantalla
 		keyboard.left().onPressDo ({
 			if (nave.position().x() > 0 ) {
 				nave.moverIzquierda()
