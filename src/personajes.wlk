@@ -59,7 +59,6 @@ class Disparo {
 	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
 	
 	method remover() {
-		game.removeTickEvent('movimientoDisparo')
 		game.removeVisual(self)
 	}
 }
@@ -100,18 +99,17 @@ class Alien {
 			if(!meMato.played())
 				meMato.play()
 			game.removeVisual(self)
-			game.removeTickEvent('movimientoAlien')
 		}	
 	}
 	
-	// movimiento de los aliens de esquina izquierda a esquina derecha.
+	// movimiento de los aliens
 	method movimientoAliens() {
 		game.onTick(600, 'movimientoAlien', {
 			self.movimientoAlien()
 		})
 	}
 	
-	// mueve al alien a la izquierda hasta el limite, despues lo lleva para la derecha. en ves de hacer eso aparece por el otro lado.
+	// mueve a cada alien
 	method movimientoAlien() {
 		if (direccion == 'derecha'){
 			self.position(self.position().right(1))
@@ -138,6 +136,7 @@ class Alien {
     
     method cambiarDireccion() { if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'} }
     
+    /* Deprecamos este metodo porque se nos rompia todo el juego
     method disparar(){
 		const disparo = new Disparo (position = self.position().down(1), color= 'Rojo')
 		
@@ -147,5 +146,5 @@ class Alien {
 			disparo.movementDown()
 			disparo.disparoFuera()
 		})
-	}
+	}*/
 }

@@ -63,10 +63,12 @@ class Juego {
 		keyboard.p().onPressDo ({ 
 			aliens.clear()
 			aliens.add(alien1) 		})
-		
+			
+		/* Quisimos agregar que los aliens disparen, pero nos rompia el juego 
 		game.onTick(1000, 'disparoAlien', {
 			aliens.any({ a => a.disparar() })
 		})
+		*/
 
 	}
 	
