@@ -87,10 +87,10 @@ class Juego {
 		<Enter> para empezar - <q> para salir"})
 		
 		keyboard.enter().onPressDo ({self.spaveInvader()})
-		keyboard.q().onPressDo ({self.terminar()})
+		keyboard.q().onPressDo ({consola.iniciar()})
 	}
 	
 	method image() = "logo.png"
 	
-	method terminar() { game.stop() }
+	/*method terminar() { game.stop() }*/
 }
