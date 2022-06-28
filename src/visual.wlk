@@ -6,14 +6,13 @@ class Visual {
 	var property position = game.origin()
 }
 
-object fondoDelJuego inherits Visual(
+const fondoDelJuego = new Visual(
 	image = "inicio.png",
 	position = game.at(0,0)
-){
-	method colisionadoPor(visual){}
-}
+)
+
 const inicioDelJuego = new Visual(
-	image =  "universo.png",
+	image =  "espacioo.jfif",
 	position = game.at(0,0)
 )
 const general = new Visual(
@@ -22,5 +21,9 @@ const general = new Visual(
 )
 const gameOver = new Visual(
 	image = "gameOver.png", 
+	position = game.at(0,0)
+)
+const winner = new Visual(
+	image = "win.jfif", 
 	position = game.at(0,0)
 )
