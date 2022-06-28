@@ -5,7 +5,7 @@ import visual.*
 object consola {
 
 	const juegos = [
-		new Juego(color = "Amarillo"),
+		spaveInvader,
 		new Juego(color = "Verde"),
 		new Juego(color = "Rojo"),
 		new Juego(color = "Azul"),

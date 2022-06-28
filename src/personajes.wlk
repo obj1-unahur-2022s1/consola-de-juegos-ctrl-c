@@ -84,7 +84,7 @@ class Alien {
         keyboard.q().onPressDo({
         	consola.iniciar()
         	game.removeVisual(gameOver)
-        	gameOverSound.stop()
+        	gameOverSound.pause()
         })
 	}
 	

@@ -4,7 +4,7 @@ import personajes.*
 import visual.*
 
 class Juego {		
-	var property color
+	var property color = null
 	var property position = null
 		
 	method spaveInvader() {
@@ -41,6 +41,12 @@ class Juego {
 		game.addVisual(nave)
 		aliens.forEach({ a => game.addVisual(a) })
 		
+		// cerrar el juego
+		keyboard.q().onPressDo ({
+			game.clear()
+			consola.iniciar()
+		})
+		
 		//movimiento de los aliens
 		aliens.forEach({ a => a.movimientoAliens() })
 		
@@ -74,6 +80,17 @@ class Juego {
 	}
 	
 	method iniciar() {
+		game.addVisual(object{method position()= game.center() method text() = "Juego "+color + " - <q> para salir"})
+	}
+	
+	method image() = "juego" + color + ".png"
+	
+	method terminar() {}
+}
+
+object spaveInvader inherits Juego {
+	
+	override method iniciar() {
 		// Sonido INTRO
 		const intro = game.sound("sounds/introSound.mp3")
 		game.addVisual(fondoDelJuego)
@@ -87,10 +104,12 @@ class Juego {
 		<Enter> para empezar - <q> para salir"})
 		
 		keyboard.enter().onPressDo ({self.spaveInvader()})
-		keyboard.q().onPressDo ({consola.iniciar()})
+		keyboard.q().onPressDo ({
+			consola.iniciar()
+			game.removeVisual(fondoDelJuego)
+			intro.pause()
+		})
 	}
 	
-	method image() = "logo.png"
-	
-	/*method terminar() { game.stop() }*/
+	override method image() = "logo.png"
 }
