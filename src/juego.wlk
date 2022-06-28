@@ -60,6 +60,10 @@ class Juego {
 		// disparo de la nave
 		keyboard.x().onPressDo ({ nave.disparar() })
 		
+		keyboard.p().onPressDo ({ 
+			aliens.clear()
+			aliens.add(alien1) 		})
+		
 		game.onTick(1000, 'disparoAlien', {
 			aliens.any({ a => a.disparar() })
 		})

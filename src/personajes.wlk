@@ -73,11 +73,14 @@ class Alien {
 	const mePego = game.sound("Sounds/cambio_color.mp3")
 	const mePego2 = game.sound("Sounds/Le_pega.mp3")
 	const meMato = game.sound("Sounds/muere_bicho.mp3")
+	const gameOver = game.sound("Sounds/game_over.mp3")
+	const winner = game.sound("Sounds/win.mp3")
 	
 	//Cuando ganan los aliens
 	method victoria() {		
 		game.clear()
         game.addVisual(gameOver)
+        gameOver.play()
 	}
 	
 	// el alien pierde uno de hp al recibir un disparo.
@@ -128,6 +131,8 @@ class Alien {
         }
         else { 
             self.victoria()
+           	if(!winner.played())
+           		 winner.play()
          }
     }
     
