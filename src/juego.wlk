@@ -8,7 +8,7 @@ class Juego {
 	var property position = null
 		
 	method spaveInvader() {
-		// creacion de aliens que no me gusta del todo.
+		// creacion de aliens que no nos gusta del todo.
 		var alien1 = new Alien (position = game.at(5,11))
 		var alien2 = new Alien (position = game.at(5,10))
 		var alien3 = new Alien (position = game.at(5,9))
@@ -65,6 +65,7 @@ class Juego {
 			aliens.add(alien1) 		})
 			
 		/* Quisimos agregar que los aliens disparen, pero nos rompia el juego 
+		
 		game.onTick(1000, 'disparoAlien', {
 			aliens.any({ a => a.disparar() })
 		})
@@ -74,7 +75,7 @@ class Juego {
 	
 	method iniciar() {
 		// Sonido INTRO
-		const intro = game.sound("Sounds/introSound.mp3")
+		const intro = game.sound("sounds/introSound.mp3")
 		game.addVisual(fondoDelJuego)
 		if(!intro.played())
 			intro.play()

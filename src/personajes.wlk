@@ -59,6 +59,7 @@ class Disparo {
 	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
 	
 	method remover() {
+		game.removeTickEvent('movimientoDisparo')
 		game.removeVisual(self)
 	}
 }
