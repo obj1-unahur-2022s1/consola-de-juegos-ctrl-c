@@ -6,11 +6,8 @@ import visual.*
 class Juego {		
 	var property color
 	var property position = null
-	
-	
 		
 	method spaveInvader() {
-		//game.stopAllSounds()
 		// creacion de aliens que no me gusta del todo.
 		var alien1 = new Alien (position = game.at(5,11))
 		var alien2 = new Alien (position = game.at(5,10))
@@ -42,13 +39,7 @@ class Juego {
 		
 		// agregando todos los personajes
 		game.addVisual(nave)
-		game.addVisual(alien1)	game.addVisual(alien8)	game.addVisual(alien15)
-		game.addVisual(alien2)	game.addVisual(alien9)	game.addVisual(alien16)
-		game.addVisual(alien3)	game.addVisual(alien10)	game.addVisual(alien17)
-		game.addVisual(alien4)	game.addVisual(alien11)	game.addVisual(alien18)
-		game.addVisual(alien5)	game.addVisual(alien12)	game.addVisual(alien19)
-		game.addVisual(alien6)	game.addVisual(alien13)	game.addVisual(alien20)
-		game.addVisual(alien7)	game.addVisual(alien14)	game.addVisual(alien21)
+		aliens.forEach({ a => game.addVisual(a) })
 		
 		//movimiento de los aliens
 		aliens.forEach({ a => a.movimientoAliens() })
@@ -68,6 +59,10 @@ class Juego {
 		
 		// disparo de la nave
 		keyboard.x().onPressDo ({ nave.disparar() })
+		
+		game.onTick(1000, 'disparoAlien', {
+			aliens.any({ a => a.disparar() })
+		})
 
 	}
 	

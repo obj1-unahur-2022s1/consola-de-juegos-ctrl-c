@@ -21,7 +21,7 @@ object nave {
 	
 	// el disparo de la nave y el movimiento del disparo.
 	method disparar(){
-		var disparo = new Disparo (position = self.position().up(1))
+		var disparo = new Disparo (position = self.position().up(1), color= 'Verde')
 		
 		// Sonido disparo
 		const shoot = game.sound("Sounds/disparo_laser.mp3")
@@ -32,7 +32,7 @@ object nave {
 		game.addVisual(disparo)
 		
 		game.onTick(100, 'movimientoDisparo', {
-			disparo.movement()
+			disparo.movementUp()
 			disparo.disparoFuera()
 		})
 		
@@ -46,10 +46,14 @@ object nave {
 
 class Disparo {
 	var property position
-	var property image = 'disparo.png'
+	const property color
+	var property image = 'disparo'+color+'.png'
 	
 	// movimiento para arriba constante del disparo.
-	method movement() { self.position( position.up(1) ) }
+	method movementUp() { self.position( position.up(1) ) }
+	
+	// movimiento para abajo constante del disparo.
+	method movementDown() { self.position( position.down(1) ) }
 	
 	// cuando sale del marco del juego se elimina al elemento (trae un error si se dispara mucho seguido)
 	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
@@ -58,10 +62,6 @@ class Disparo {
 		game.removeTickEvent('movimientoDisparo')
 		game.removeVisual(self)
 	}
-	
-  	
-  	// una prueba con la colicion del disparo y el alien, pero al ser ambos clases nose me sale.
-  	/*method darEnAlien(unAlien) { game.onCollideDo(unAlien, unAlien.degragadarHp()) }*/
 }
 
 class Alien {
@@ -69,6 +69,7 @@ class Alien {
 	var property image = 'alienVerde.png'
 	var property hp = 3
 	var property direccion = 'derecha'
+
 	const mePego = game.sound("Sounds/cambio_color.mp3")
 	const mePego2 = game.sound("Sounds/Le_pega.mp3")
 	const meMato = game.sound("Sounds/muere_bicho.mp3")
@@ -96,13 +97,13 @@ class Alien {
 			if(!meMato.played())
 				meMato.play()
 			game.removeVisual(self)
-			/*game.removeTickEvent('movimientoAlien')*/
+			game.removeTickEvent('movimientoAlien')
 		}	
 	}
 	
 	// movimiento de los aliens de esquina izquierda a esquina derecha.
 	method movimientoAliens() {
-		game.onTick(500, 'movimientoAlien', {
+		game.onTick(600, 'movimientoAlien', {
 			self.movimientoAlien()
 		})
 	}
@@ -118,17 +119,28 @@ class Alien {
 			self.moverAbajoSiPuede()
 			self.cambiarDireccion()
 		}
-		/*if (self.position().x() > 0 ) { self.position(self.position().left(1)) }
-		else { self.position(self.position().right(game.width()- 1)) }*/
 	}
 	
 	// si pueden bajan una posición, si llegan a la altura de la nave es game over
 	method moverAbajoSiPuede() {
-        if(self.position().y() > nave.position().y()) { self.position(self.position().down(1)) }
+        if(self.position().y() > nave.position().y()) {
+        	self.position(self.position().down(1))
+        }
         else { 
             self.victoria()
          }
     }
     
-    method cambiarDireccion() = if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'}
+    method cambiarDireccion() { if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'} }
+    
+    method disparar(){
+		const disparo = new Disparo (position = self.position().down(1), color= 'Rojo')
+		
+		game.addVisual(disparo)
+		
+		game.onTick(100, 'movimientoDisparo', {
+			disparo.movementDown()
+			disparo.disparoFuera()
+		})
+	}
 }
