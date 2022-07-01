@@ -31,7 +31,7 @@ object nave {
 				
 		game.addVisual(disparo)
 		
-		game.onTick(1, 'movimientoDisparo', {
+		game.onTick(0.5, 'movimientoDisparo', {
 			disparo.movementUp()
 			disparo.disparoFuera()
 		})
