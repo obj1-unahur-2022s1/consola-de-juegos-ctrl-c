@@ -64,7 +64,9 @@ class Juego {
 		})
 		
 		// disparo de la nave
-		keyboard.x().onPressDo ({ nave.disparar() })
+		keyboard.x().onPressDo ({ 
+			nave.disparar()
+		})
 		
 		keyboard.p().onPressDo ({ 
 			aliens.clear()

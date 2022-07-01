@@ -12,7 +12,7 @@ const fondoDelJuego = new Visual(
 )
 
 const inicioDelJuego = new Visual(
-	image =  "espacioo.jfif",
+	image =  "spacePixel.png",
 	position = game.at(0,0)
 )
 const general = new Visual(

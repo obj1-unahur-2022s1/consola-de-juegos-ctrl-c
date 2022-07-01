@@ -20,7 +20,7 @@ object nave {
 	}
 	
 	// el disparo de la nave y el movimiento del disparo.
-	method disparar(){
+	method disparar(){ 
 		var disparo = new Disparo (position = self.position().up(1), color= 'Verde')
 		
 		// Sonido disparo
@@ -28,17 +28,17 @@ object nave {
 		const mePego = game.sound("Sounds/cambio_color.mp3")
 		if(!shoot.played())
 				shoot.play()
-		
+				
 		game.addVisual(disparo)
 		
-		game.onTick(100, 'movimientoDisparo', {
+		game.onTick(1, 'movimientoDisparo', {
 			disparo.movementUp()
 			disparo.disparoFuera()
 		})
 		
-		game.whenCollideDo(disparo, { alien1 => 
-			alien1.recibirDisparo() 
-			alien1.checkHp()
+		game.whenCollideDo(disparo, { alien =>
+			alien.recibirDisparo() 
+			alien.checkHp()
 			disparo.remover()
 		} )
 	}
