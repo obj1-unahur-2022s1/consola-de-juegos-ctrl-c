@@ -130,7 +130,7 @@ class Alien {
 	
 	// si pueden bajan una posición, si llegan a la altura de la nave es game over
 	method moverAbajoSiPuede() {
-        if(self.position().y() > nave.position().y()) {
+        if(self.position().y() > nave.position().y()+1) {
         	self.position(self.position().down(1))
         }
         else { 
