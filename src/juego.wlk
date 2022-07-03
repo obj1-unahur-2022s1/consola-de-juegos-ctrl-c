@@ -70,14 +70,35 @@ class Juego {
 		
 		keyboard.p().onPressDo ({ 
 			aliens.clear()
-			aliens.add(alien1) 		})
-			
-		/* Quisimos agregar que los aliens disparen, pero nos rompia el juego 
-		
-		game.onTick(1000, 'disparoAlien', {
-			aliens.any({ a => a.disparar() })
+			aliens.add(alien1) 		
 		})
-		*/
+
+		
+		// Revisamos condiciones para finalizar la partida	
+		game.onTick(0.1, 'condicionVictoria', {
+			if (aliens.size()*100 == nave.puntaje()){
+				game.clear()
+				game.addVisual(winner)
+			}
+			
+			if (nave.hp() == 0){
+				aliens.anyOne().victoria()
+			}
+		})
+		
+		// Agregamos el puntaje en pantalla
+		game.addVisual(object{method position()= game.at(1,game.height()-1) method text() = 
+		"SCORE:" + nave.puntaje()})
+		
+		// Agregamos la vida de la nave en pantalla
+		game.addVisual(object{method position()= game.at(game.width()-1,game.height()-1) method text() = 
+		"HP:" + nave.hp() })
+			
+		//Disparos de los aliens
+		game.onTick(1000, 'disparoAlien', {
+			aliens.anyOne().disparar()
+		})
+		
 
 	}
 	

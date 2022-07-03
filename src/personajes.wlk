@@ -3,12 +3,14 @@ import juego.*
 import visual.*
 import consola.*
 
-// cambie la nave por un objeto ya que es una unica nave en el juego.
+
 object nave {
 	var property position = game.at(game.width().div(2),0)
+	var property puntaje = 0
+	var property hp = 3
+	
 	const property image='nave.png'
 	const property speed = 1
-	const property hp = 10
 	
 	// movimiento de derecha a izquierda.
 	method moverDerecha(){
@@ -18,6 +20,10 @@ object nave {
 	method moverIzquierda(){
 		self.position(self.position().left(speed))
 	}
+	
+	method sumarPuntos() {puntaje += 100}
+	
+	method recibirDisparo() { hp = 0.max(hp - 1) }
 	
 	// el disparo de la nave y el movimiento del disparo.
 	method disparar(){ 
@@ -50,13 +56,13 @@ class Disparo {
 	var property image = 'disparo'+color+'.png'
 	
 	// movimiento para arriba constante del disparo.
-	method movementUp() { self.position( position.up(1) ) }
+	method movementUp() { self.position( position.up(1) )}
 	
 	// movimiento para abajo constante del disparo.
-	method movementDown() { self.position( position.down(1) ) }
+	method movementDown() { self.position( position.down(1) )}
 	
 	// cuando sale del marco del juego se elimina al elemento (trae un error si se dispara mucho seguido)
-	method disparoFuera() { if ([-1, game.height()].contains(position.y())) self.remover() }
+	method disparoFuera() { if ([-1, game.height()].contains(position.y())) {self.remover()} }
 	
 	method remover() {
 		game.removeTickEvent('movimientoDisparo')
@@ -105,6 +111,7 @@ class Alien {
 			if(!meMato.played())
 				meMato.play()
 			game.removeVisual(self)
+			nave.sumarPuntos()
 		}	
 	}
 	
@@ -142,15 +149,20 @@ class Alien {
     
     method cambiarDireccion() { if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'} }
     
-    /* Deprecamos este metodo porque se nos rompia todo el juego
+    //Deprecamos este metodo porque se nos rompia todo el juego
     method disparar(){
 		const disparo = new Disparo (position = self.position().down(1), color= 'Rojo')
 		
 		game.addVisual(disparo)
 		
-		game.onTick(100, 'movimientoDisparo', {
+		game.onTick(200, 'movimientoDisparo', {
 			disparo.movementDown()
 			disparo.disparoFuera()
 		})
-	}*/
+		
+		game.whenCollideDo(disparo, { nave =>
+			nave.recibirDisparo() 
+			disparo.remover()
+		} )
+	}
 }
