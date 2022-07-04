@@ -1,7 +1,7 @@
 import consola.*
 import wollok.game.*
 
-class Visual {
+class Visual { 
 	var property image
 	var property position = game.origin()
 }

@@ -5,5 +5,5 @@ program juegos {
 
 	consola.iniciar()
 	
-	game.start()
+	game.start() 
 }

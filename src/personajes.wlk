@@ -50,7 +50,7 @@ object nave {
 	}
 }
 
-class Disparo {
+class Disparo { 
 	var property position
 	const property color
 	var property image = 'disparo'+color+'.png'
@@ -157,7 +157,7 @@ class Alien {
 		
 		game.onTick(200, 'movimientoDisparo', {
 			disparo.movementDown()
-			disparo.disparoFuera()
+			disparo.disparoFuera() 
 		})
 		
 		game.whenCollideDo(disparo, { nave =>

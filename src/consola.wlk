@@ -14,16 +14,15 @@ object consola {
 	]
 	var menu 
 	
-	method initialize(){
+	method inicialize(){
 		game.height(12)
 		game.width(17)
 		game.title("Consola de juegos")
 		game.addVisual(general)
-		
-		
 	}
 	
-	method iniciar(){
+	method iniciar(){ 
+		self.inicialize()
 		menu = new MenuIconos(posicionInicial = game.at(8,4).left(2))	
 		game.addVisual(menu)
 		juegos.forEach{juego=>menu.agregarItem(juego)}

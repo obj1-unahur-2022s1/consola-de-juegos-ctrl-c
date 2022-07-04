@@ -3,7 +3,7 @@ import consola.*
 import personajes.*
 import visual.*
 
-class Juego {		
+class Juego {	
 	var property color = null
 	var property position = null
 		
@@ -108,7 +108,12 @@ class Juego {
 	
 	method image() = "juego" + color + ".png"
 	
-	method terminar() {}
+	method terminar() {
+		keyboard.q().onPressDo ({
+			consola.iniciar()
+			
+			})
+	}
 }
 
 object spaveInvader inherits Juego {
