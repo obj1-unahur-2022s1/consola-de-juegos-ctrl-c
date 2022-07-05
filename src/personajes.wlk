@@ -11,7 +11,6 @@ object nave {
 	
 	const property image='nave.png'
 	const property speed = 1
-	const gameOverSound = game.sound("Sounds/game_over.mp3")
 	
 	// movimiento de derecha a izquierda.
 	method moverDerecha(){
@@ -60,6 +59,8 @@ class Disparo {
 	method disparoFuera() { if ([-1, game.height()].contains(position.y())) {self.remover()} }
 	
 	method remover()
+	
+	method recibirDisparo() { self.remover() }
 }
 
 class DisparoNave inherits Disparo {
