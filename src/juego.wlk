@@ -93,12 +93,20 @@ class Juego {
 		})
 		
 		// Agregamos el puntaje en pantalla
-		game.addVisual(object{method position()= game.at(1,game.height()-1) method text() = 
-		"SCORE:" + nave.puntaje()})
+		game.addVisual(object{
+			method position()= game.at(1,game.height()-1) 
+			method text() = "SCORE:" + nave.puntaje()
+			method recibirDisparo() {}
+			method checkHp() {}
+		})
 		
 		// Agregamos la vida de la nave en pantalla
-		game.addVisual(object{method position()= game.at(game.width()-1,game.height()-1) method text() = 
-		"HP:" + nave.hp() })
+		game.addVisual(object{
+			method position()= game.at(game.width()-1,game.height()-1) 
+			method text() = "HP:" + nave.hp() 
+			method recibirDisparo() {}
+			method checkHp() {}
+		})
 			
 		//Disparos de los aliens
 		game.onTick(1000, 'disparoAlien', {
