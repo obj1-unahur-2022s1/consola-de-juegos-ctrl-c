@@ -11,6 +11,7 @@ object nave {
 	
 	const property image='nave.png'
 	const property speed = 1
+	const gameOverSound = game.sound("Sounds/game_over.mp3")
 	
 	// movimiento de derecha a izquierda.
 	method moverDerecha(){
@@ -27,7 +28,7 @@ object nave {
 	
 	// el disparo de la nave y el movimiento del disparo.
 	method disparar(){ 
-		var disparo = new Disparo (position = self.position().up(1), color= 'Verde')
+		var disparo = new DisparoNave (position = self.position().up(1), color= 'Verde')
 		
 		// Sonido disparo
 		const shoot = game.sound("Sounds/disparo_laser.mp3")
@@ -48,6 +49,22 @@ object nave {
 			disparo.remover()
 		} )
 	}
+	
+	/*method derrota() {		
+		game.clear()
+        game.addVisual(gameOver)
+        gameOverSound.play()
+        keyboard.q().onPressDo({
+        	consola.iniciar()
+        	game.removeVisual(gameOver)
+        	gameOverSound.pause()
+        	spaveInvader.terminar()
+        })
+	}
+	
+	method perder() {
+		if(hp == 0) {self.derrota()}
+	}*/
 }
 
 class Disparo { 
@@ -55,17 +72,30 @@ class Disparo {
 	const property color
 	var property image = 'disparo'+color+'.png'
 	
+	// cuando sale del marco del juego se elimina al elemento.
+	method disparoFuera() { if ([-1, game.height()].contains(position.y())) {self.remover()} }
+	
+	method remover()
+}
+
+class DisparoNave inherits Disparo {
+	
 	// movimiento para arriba constante del disparo.
 	method movementUp() { self.position( position.up(1) )}
+	
+	override method remover() {
+		game.removeTickEvent('movimientoDisparo')
+		game.removeVisual(self)
+	}
+}
+
+class DisparoAlien inherits Disparo {
 	
 	// movimiento para abajo constante del disparo.
 	method movementDown() { self.position( position.down(1) )}
 	
-	// cuando sale del marco del juego se elimina al elemento (trae un error si se dispara mucho seguido)
-	method disparoFuera() { if ([-1, game.height()].contains(position.y())) {self.remover()} }
-	
-	method remover() {
-		game.removeTickEvent('movimientoDisparo')
+	override method remover() {
+		game.removeTickEvent('movimientoDisparoA')
 		game.removeVisual(self)
 	}
 }
@@ -149,12 +179,12 @@ class Alien {
     method cambiarDireccion() { if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'} }
     
     //Deprecamos este metodo porque se nos rompia todo el juego
-    /*method disparar(){
-		const disparo = new Disparo (position = self.position().down(1), color= 'Rojo')
+    method disparar(){
+		const disparo = new DisparoAlien (position = self.position().down(1), color= 'Rojo')
 		
 		game.addVisual(disparo)
 		
-		game.onTick(50, 'movimientoDisparo', {
+		game.onTick(50, 'movimientoDisparoA', {
 			disparo.movementDown()
 			disparo.disparoFuera() 
 		})
@@ -163,5 +193,5 @@ class Alien {
 			nave.recibirDisparo() 
 			disparo.remover()
 		} )
-	}*/
+	}
 }

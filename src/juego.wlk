@@ -101,9 +101,9 @@ class Juego {
 		"HP:" + nave.hp() })
 			
 		//Disparos de los aliens
-		/*game.onTick(1000, 'disparoAlien', {
+		game.onTick(1000, 'disparoAlien', {
 			aliens.anyOne().disparar()
-		})*/
+		})
 		
 
 	}
@@ -116,9 +116,10 @@ class Juego {
 	
 	method terminar() {
 		keyboard.q().onPressDo ({
-			/*consola.iniciar()*/
+			consola.iniciar()
 			consola.hacerTerminar(self)
 			nave.puntaje(0)
+			nave.hp(3)
 			})
 	}
 }
