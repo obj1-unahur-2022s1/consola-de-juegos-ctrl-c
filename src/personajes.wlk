@@ -49,22 +49,6 @@ object nave {
 			disparo.remover()
 		} )
 	}
-	
-	/*method derrota() {		
-		game.clear()
-        game.addVisual(gameOver)
-        gameOverSound.play()
-        keyboard.q().onPressDo({
-        	consola.iniciar()
-        	game.removeVisual(gameOver)
-        	gameOverSound.pause()
-        	spaveInvader.terminar()
-        })
-	}
-	
-	method perder() {
-		if(hp == 0) {self.derrota()}
-	}*/
 }
 
 class Disparo { 
