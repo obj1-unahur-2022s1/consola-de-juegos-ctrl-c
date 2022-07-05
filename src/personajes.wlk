@@ -31,7 +31,7 @@ object nave {
 		
 		// Sonido disparo
 		const shoot = game.sound("Sounds/disparo_laser.mp3")
-		const mePego = game.sound("Sounds/cambio_color.mp3")
+
 		if(!shoot.played())
 				shoot.play()
 				
@@ -118,7 +118,7 @@ class Alien {
 	
 	// movimiento de los aliens
 	method movimientoAliens() {
-		game.onTick(600, 'movimientoAlien', {
+		game.onTick(500, 'movimientoAlien', {
 			self.movimientoAlien()
 		})
 	}
@@ -143,15 +143,13 @@ class Alien {
         }
         else { 
             self.victoria()
-           	//if(!winner.played())
-           	//	 winner.play()
          }
     }
     
     method cambiarDireccion() { if (direccion == 'derecha') {direccion = 'izquierda'} else {direccion = 'derecha'} }
     
     //Deprecamos este metodo porque se nos rompia todo el juego
-    method disparar(){
+    /*method disparar(){
 		const disparo = new Disparo (position = self.position().down(1), color= 'Rojo')
 		
 		game.addVisual(disparo)
@@ -165,5 +163,5 @@ class Alien {
 			nave.recibirDisparo() 
 			disparo.remover()
 		} )
-	}
+	}*/
 }

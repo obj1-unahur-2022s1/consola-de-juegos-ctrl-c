@@ -24,6 +24,6 @@ const gameOver = new Visual(
 	position = game.at(0,0)
 )
 const winner = new Visual(
-	image = "win.jfif", 
+	image = "win.png", 
 	position = game.at(0,0)
 )

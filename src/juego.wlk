@@ -64,9 +64,11 @@ class Juego {
 		})
 		
 		// disparo de la nave
-		keyboard.x().onPressDo ({ 
+		game.onTick(500, 'disparar', { nave.disparar() })
+		
+		/*keyboard.x().onPressDo ({ 
 			nave.disparar()
-		})
+		})*/
 		
 		keyboard.p().onPressDo ({ 
 			aliens.clear()
@@ -99,9 +101,9 @@ class Juego {
 		"HP:" + nave.hp() })
 			
 		//Disparos de los aliens
-		game.onTick(1000, 'disparoAlien', {
+		/*game.onTick(1000, 'disparoAlien', {
 			aliens.anyOne().disparar()
-		})
+		})*/
 		
 
 	}
@@ -132,7 +134,7 @@ object spaveInvader inherits Juego {
 		game.addVisual(object{method position()= game.at(8,4) method text() = 
 		"SPAVE INVADERS\n
 		INSTRUCCIONES: Utilice las flechas para mover su nave, 
-		\nasegurese de disparar con la X a todos los aliens\n
+		\nasegurese de disparar a todos los aliens\n
 		\n
 		<Enter> para empezar - <q> para salir"})
 		
