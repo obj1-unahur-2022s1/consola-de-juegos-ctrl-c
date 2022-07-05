@@ -79,10 +79,14 @@ class Juego {
 			if (aliens.size()*100 == nave.puntaje()){
 				game.clear()
 				game.addVisual(winner)
+				self.terminar()
 			}
 			
 			if (nave.hp() == 0){
-				aliens.anyOne().victoria()
+				game.clear()
+				game.addVisual(gameOver)
+				self.terminar()
+				/*aliens.anyOne().victoria()*/
 			}
 		})
 		
@@ -110,8 +114,9 @@ class Juego {
 	
 	method terminar() {
 		keyboard.q().onPressDo ({
-			consola.iniciar()
-			
+			/*consola.iniciar()*/
+			consola.hacerTerminar(self)
+			nave.puntaje(0)
 			})
 	}
 }

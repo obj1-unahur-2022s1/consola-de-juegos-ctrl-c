@@ -91,6 +91,7 @@ class Alien {
         	consola.iniciar()
         	game.removeVisual(gameOver)
         	gameOverSound.pause()
+        	spaveInvader.terminar()
         })
 	}
 	
@@ -155,7 +156,7 @@ class Alien {
 		
 		game.addVisual(disparo)
 		
-		game.onTick(200, 'movimientoDisparo', {
+		game.onTick(50, 'movimientoDisparo', {
 			disparo.movementDown()
 			disparo.disparoFuera() 
 		})
